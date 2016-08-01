@@ -1,0 +1,151 @@
+<html ng-app="schApp">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Schroeder - Quem ganha?</title>
+		<link href="bootstrap.min.css" rel="stylesheet">
+		<link href="style.css" rel="stylesheet">
+	</head>
+	<body ng-controller="schCtrl" class="ng-cloak">
+		<div id="modal" class="__web-inspector-hide-shortcut__">
+		  <div class="modal-content">
+	     <div class="modal-header">
+	        <a type="button" href="#" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+	        <h3 class="modal-title">{{selected.name}}</h3>
+	      </div>
+	      <div class="modal-body" id='modal-body'>
+	        <table class="table table-condensed table-striped">
+        		<thead>
+        			<tr>
+        				<th>Candidato</th>
+        				<th class="text-center" width="100px">Votos</th>
+        			</tr>
+        		</thead>
+        		<tbody>
+        			<tr>
+        				<td>Branco</td>
+        				<td class="text-center" width="100px">{{getCountSelectedVotos('0', selected.type)}}</td>
+        			</tr>
+        			<tr>
+        				<td>Nulos</td>
+        				<td class="text-center" width="100px">{{getCountSelectedVotos('1', selected.type)}}</td>
+        			</tr>
+        			<tr ng-repeat="select in selected.selected | orderBy:'-quantidade'">
+        				<td >{{select.nome}}</td>
+        				<td class="text-center" width="100px">{{select.quantidade || '0'}}</td>
+        			</tr>
+        		</tbody>
+        	</table>
+	      </div>
+		  </div>
+		  <div class="overlay"></div>
+		</div>
+		<audio controls class="hide" id="audio">
+		  <source src="som.mp3" type="audio/mp3">
+		</audio>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-default">
+					  <div class="panel-body text-center">
+					  	<div class="col-md-8">
+					  		<h3>Eleições Schroeder - Quem ganha?</h3>
+					  	</div>
+					  	<div class="col-md-4">
+					  		<a class="btn btn-primary btn-lg" href="https://www.facebook.com/sharer/sharer.php?u=http://urna.schroeder.net.br/" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;" title="Facebook">COMPARTILHAR NO FACEBOOK</a>
+					  	</div>
+					  </div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="panel panel-default">
+					  <div class="panel-body">
+					    <div class="row col-md-12">
+								<blockquote><h3>Prefeito</h3></blockquote>
+							</div>
+							<div class="text-center" ng-show="!votePrefeitoSim()">
+								<h3>Ops! Parece que você já votou.</h3>
+								<h4>Veja os votos no link abaixo.</h4>
+							</div>
+							<form ng-show="votePrefeitoSim()">
+							  <div class="form-group typeahead" ng-class="{ 'has-error': hasPrefeito() }">
+							    <input type="text" ng-model="prefeito" typeahead="prefeito as (prefeito.nome + ' (' + prefeito.partido + ') - ' + prefeito.numero) for prefeito in prefeitos | filter:$viewValue | limitTo:20" class="form-control text-center input-lg" placeholder="Digite o NÚMERO, NOME ou PARTIDO do seu candidato à prefeito" />
+							  </div>
+							  <div class="text-center">
+								  <button type="button" class="btn btn-success btn-lg" ng-click="validVote('0', prefeito)">Confirmar</button>
+								  <button type="button" class="btn btn-default btn-lg" ng-click="vote('0', '0')">Branco</button>
+								  <button type="button" class="btn btn-danger btn-lg" ng-click="vote('1', '0')">Anular</button>
+								</div>
+							</form>
+							<br/>
+							<div class="row text-center">
+								<div class="col-md-5">
+									<h3>Total de votos: {{getCountVotos('0')}}</h3>
+								</div>
+								<div class="col-md-7">
+									<h3><a href="#modal" ng-click="getCandidatos('Prefeitos', prefeitos, '0')">VISUALIZAR VOTOS</a></h3>
+								</div>
+							</div>
+					  </div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="panel panel-default">
+					  <div class="panel-body">
+							<div class="row col-md-12">
+								<blockquote><h3>Vereador</h3></blockquote>
+							</div>
+							<div class="text-center" ng-show="!voteVereadorSim()">
+								<h3>Ops! Parece que você já votou.</h3>
+								<h4>Veja os votos no link abaixo.</h4>
+							</div>
+							<form ng-show="voteVereadorSim()">
+							  <div class="form-group typeahead" ng-class="{ 'has-error': hasVereador() }">
+							    <input type="text" ng-model="vereador" typeahead="vereador as (vereador.nome + ' (' + vereador.partido + ') - ' + vereador.numero) for vereador in vereadores | filter:$viewValue | limitTo:20" class="form-control text-center input-lg" placeholder="Digite o NÚMERO, NOME ou PARTIDO do seu candidato à vereador" />
+							  </div>
+							  <div class="text-center">
+							  	<button type="button" class="btn btn-success btn-lg" ng-click="validVote('1', vereador)">Confirmar</button>
+								  <button type="button" class="btn btn-default btn-lg" ng-click="vote('0', '1')">Branco</button>
+								  <button type="button" class="btn btn-danger btn-lg" ng-click="vote('1', '1')">Anular</button>
+							  </div>
+							</form>
+							<br/>
+							<div class="row text-center">
+								<div class="col-md-5">
+									<h3>Total de votos: {{getCountVotos('1')}}</h3>
+								</div>
+								<div class="col-md-7">
+									<h3><a href="#modal" ng-click="getCandidatos('Vereadores', vereadores, '1')">VISUALIZAR VOTOS</a></h3>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-default">
+					  <div class="panel-body text-center">
+					  	<div id="disqus_thread"></div>
+							<script>
+							(function(){
+							    var d = document, s = d.createElement('script');
+							    s.src = '//urna.disqus.com/embed.js';
+							    s.setAttribute('data-timestamp', +new Date());
+							    (d.head || d.body).appendChild(s);
+							})();
+							</script>
+							<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+					  </div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="angular.min.js"></script>
+    <script src="ui-bootstrap-tpls.min.js"></script>
+   	<script src="app.js"></script>
+	</body>
+</html>
