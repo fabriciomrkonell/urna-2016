@@ -30,7 +30,7 @@ angular.module('schApp').controller('schCtrl', ['$scope', '$http', function($sco
     return "";
   }
 
-  var url = '';
+  var url = '107.170.43.204:5000';
 
   $scope.votoVereador = getCookie('votoVereador') !== '1';
   $scope.votoPrefeito = getCookie('votoPrefeito') !== '1';
@@ -149,7 +149,7 @@ angular.module('schApp').controller('schCtrl', ['$scope', '$http', function($sco
   $scope.vereadores = [];
   $scope.prefeitos = [];
 
-  $http.get(url + '/dados.json').then(function(data){
+  $http.get(url + '/app/dados').then(function(data){
     data = data.data;
     $scope.podeVotar = data.podeVotar;
     $scope.vereadores = data.data.vereadores;
