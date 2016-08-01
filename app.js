@@ -30,7 +30,7 @@ angular.module('schApp').controller('schCtrl', ['$scope', '$http', function($sco
     return "";
   }
 
-  var url = '/app';
+  var url = '';
 
   $scope.votoVereador = getCookie('votoVereador') !== '1';
   $scope.votoPrefeito = getCookie('votoPrefeito') !== '1';
@@ -42,11 +42,6 @@ angular.module('schApp').controller('schCtrl', ['$scope', '$http', function($sco
   };
 
   $scope.dados = [];
-
-  $http.get(url).then(function(data){
-    $scope.dados = data.data.data;
-    $scope.transform(data.data.data);
-  });
 
   $scope.votePrefeitoSim = function(){
     return $scope.votoPrefeito || $scope.podeVotar;
@@ -114,7 +109,7 @@ angular.module('schApp').controller('schCtrl', ['$scope', '$http', function($sco
 
   $scope.vote = function(number, type){
     document.getElementById('audio').play();
-    $http.post(url, {
+    $http.post(url + '/app', {
       numero: number,
       tipo: type
     }).then(function(data){
@@ -151,118 +146,18 @@ angular.module('schApp').controller('schCtrl', ['$scope', '$http', function($sco
   $scope.prefeito = '';
   $scope.validPrefeito = false;
 
-  $scope.vereadores = [{
-    nome: 'AAAA',
-    partido: 'BBBB',
-    numero: '123456',
-    quantity: 0
-  }];
+  $scope.vereadores = [];
+  $scope.prefeitos = [];
 
-  $scope.prefeitos = [{
-    nome: 'Osvaldo e Adriano',
-    partido: 'DDD',
-    numero: '45',
-    quantity: 0
-  }, {
-    nome: 'Felipe Voight e Teste',
-    partido: 'DDD',
-    numero: '11',
-    quantity: 0
-  }, {
-    nome: 'OIOIOI',
-    partido: 'DDD',
-    numero: '15',
-    quantity: 0
-  },{
-    nome: 'Osvaldo e Adriano',
-    partido: 'DDD',
-    numero: '45',
-    quantity: 0
-  }, {
-    nome: 'Felipe Voight e Teste',
-    partido: 'DDD',
-    numero: '11',
-    quantity: 0
-  }, {
-    nome: 'OIOIOI',
-    partido: 'DDD',
-    numero: '15',
-    quantity: 0
-  },{
-    nome: 'Osvaldo e Adriano',
-    partido: 'DDD',
-    numero: '45',
-    quantity: 0
-  }, {
-    nome: 'Felipe Voight e Teste',
-    partido: 'DDD',
-    numero: '11',
-    quantity: 0
-  }, {
-    nome: 'OIOIOI',
-    partido: 'DDD',
-    numero: '15',
-    quantity: 0
-  },{
-    nome: 'Osvaldo e Adriano',
-    partido: 'DDD',
-    numero: '45',
-    quantity: 0
-  }, {
-    nome: 'Felipe Voight e Teste',
-    partido: 'DDD',
-    numero: '11',
-    quantity: 0
-  }, {
-    nome: 'OIOIOI',
-    partido: 'DDD',
-    numero: '15',
-    quantity: 0
-  },{
-    nome: 'Osvaldo e Adriano',
-    partido: 'DDD',
-    numero: '45',
-    quantity: 0
-  }, {
-    nome: 'Felipe Voight e Teste',
-    partido: 'DDD',
-    numero: '11',
-    quantity: 0
-  }, {
-    nome: 'OIOIOI',
-    partido: 'DDD',
-    numero: '15',
-    quantity: 0
-  },{
-    nome: 'Osvaldo e Adriano',
-    partido: 'DDD',
-    numero: '45',
-    quantity: 0
-  }, {
-    nome: 'Felipe Voight e Teste',
-    partido: 'DDD',
-    numero: '11',
-    quantity: 0
-  }, {
-    nome: 'OIOIOI',
-    partido: 'DDD',
-    numero: '15',
-    quantity: 0
-  },{
-    nome: 'Osvaldo e Adriano',
-    partido: 'DDD',
-    numero: '45',
-    quantity: 0
-  }, {
-    nome: 'Felipe Voight e Teste',
-    partido: 'DDD',
-    numero: '11',
-    quantity: 0
-  }, {
-    nome: 'OIOIOI',
-    partido: 'DDD',
-    numero: '15',
-    quantity: 0
-  }];
+  $http.get(url + '/dados.json').then(function(data){
+    data = data.data;
+    $scope.podeVotar = data.podeVotar;
+    $scope.vereadores = data.data.vereadores;
+    $scope.prefeitos = data.data.prefeitos;
+    $http.get(url + '/app').then(function(_data){
+      $scope.dados = _data.data.data;
+      $scope.transform(_data.data.data);
+    });
+  });
 
 }]);
