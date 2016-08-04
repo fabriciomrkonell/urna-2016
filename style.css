@@ -9,7 +9,7 @@
 }
 
 .container-fluid {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 h3 {
@@ -24,46 +24,34 @@ body {
   background-size: cover;
 }
 
-
-#modal {
-  left: 50%;
-  margin: -250px 0 0 -32%;
-  opacity: 0;
-  position: absolute;
-  top: -50%;
-  visibility: hidden;
-  width: 65%;
+h4{
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
-#modal:target {
-  opacity: 1;
-  top: 50%;
-  visibility: visible
+.tab-pane{
+  height: 405px;
+  overflow-x: scroll;
 }
 
-#modal .copy, #modal .header, #modal .footer {
-  padding: 10px;
-  color: #fff
+.panel-body-vote{
+  padding: 10px 10px 0px 10px !important;
 }
 
-.modal-content {
-  position: relative;
-  z-index: 20;
-  border-radius: 5px;
+.panel-body-title{
+  padding: 5px 10px 5px 10px;
 }
 
-#modal .overlay {
-  background-color: #000;
-  background: rgba(0,0,0,.8);
-  height: 100%;
-  left: 0;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 10
+.table{
+  margin-top: 10px;
 }
 
-.modal-body{
-  height: 400px;
-  overflow-x: hidden;
+.vote-true{
+  height: 0px;
+  margin-top: 101px;
+}
+
+.vote-true-h4{
+  height: 56px;
+  margin-top: 50px;
 }

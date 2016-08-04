@@ -30,7 +30,7 @@ angular.module('schApp').controller('schCtrl', ['$scope', '$http', function($sco
     return "";
   }
 
-  var url = 'http://tcc.fabricioronchi.com';
+  var url = '';
 
   $scope.votoVereador = getCookie('votoVereador') !== '1';
   $scope.votoPrefeito = getCookie('votoPrefeito') !== '1';
@@ -69,7 +69,6 @@ angular.module('schApp').controller('schCtrl', ['$scope', '$http', function($sco
   };
 
   $scope.getCandidatos = function(name, list, type){
-    document.getElementById('modal-body').scrollTop = 0;
     $scope.selected ={
       name: name,
       selected: list,
@@ -157,6 +156,7 @@ angular.module('schApp').controller('schCtrl', ['$scope', '$http', function($sco
     $http.get(url + '/app').then(function(_data){
       $scope.dados = _data.data.data;
       $scope.transform(_data.data.data);
+      $scope.getCandidatos('Prefeitos', $scope.prefeitos, '0');
     });
   });
 

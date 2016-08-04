@@ -8,39 +8,6 @@
 		<link href="style.css" rel="stylesheet">
 	</head>
 	<body ng-controller="schCtrl" class="ng-cloak">
-		<div id="modal" class="__web-inspector-hide-shortcut__">
-		  <div class="modal-content">
-	     <div class="modal-header">
-	        <a type="button" href="#" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
-	        <h3 class="modal-title">{{selected.name}}</h3>
-	      </div>
-	      <div class="modal-body" id='modal-body'>
-	        <table class="table table-condensed table-striped">
-        		<thead>
-        			<tr>
-        				<th>Candidato</th>
-        				<th class="text-center" width="100px">Votos</th>
-        			</tr>
-        		</thead>
-        		<tbody>
-        			<tr>
-        				<td>Branco</td>
-        				<td class="text-center" width="100px">{{getCountSelectedVotos('0', selected.type)}}</td>
-        			</tr>
-        			<tr>
-        				<td>Nulos</td>
-        				<td class="text-center" width="100px">{{getCountSelectedVotos('1', selected.type)}}</td>
-        			</tr>
-        			<tr ng-repeat="select in selected.selected | orderBy:'-quantidade'">
-        				<td >{{select.nome}}</td>
-        				<td class="text-center" width="100px">{{select.quantidade || '0'}}</td>
-        			</tr>
-        		</tbody>
-        	</table>
-	      </div>
-		  </div>
-		  <div class="overlay"></div>
-		</div>
 		<audio controls class="hide" id="audio">
 		  <source src="som.mp3" type="audio/mp3">
 		</audio>
@@ -48,7 +15,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="panel panel-default">
-					  <div class="panel-body text-center">
+					  <div class="panel-body text-center panel-body-title">
 					  	<div class="col-md-8">
 					  		<h3>Eleições Schroeder - Quem ganha?</h3>
 					  	</div>
@@ -62,13 +29,13 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="panel panel-default">
-					  <div class="panel-body">
+					  <div class="panel-body panel-body-vote">
 					    <div class="row col-md-12">
-								<blockquote><h3>Prefeito</h3></blockquote>
+								<blockquote><h3>Prefeito <span class="pull-right">{{getCountVotos('0')}} Votos</span></h3></blockquote>
 							</div>
 							<div class="text-center" ng-show="!votePrefeitoSim()">
-								<h3>Ops! Parece que você já votou.</h3>
-								<h4>Veja os votos no link abaixo.</h4>
+								<h3 class="vote-true">Ops! Parece que você já votou.</h3>
+								<h4 class="vote-true-h4">Deixe o seu comentário!</h4>
 							</div>
 							<form ng-show="votePrefeitoSim()">
 							  <div class="form-group typeahead" ng-class="{ 'has-error': hasPrefeito() }">
@@ -80,27 +47,16 @@
 								  <button type="button" class="btn btn-danger btn-lg" ng-click="vote('1', '0')">Anular</button>
 								</div>
 							</form>
-							<br/>
-							<div class="row text-center">
-								<div class="col-md-5">
-									<h3>Total de votos: {{getCountVotos('0')}}</h3>
-								</div>
-								<div class="col-md-7">
-									<h3><a href="#modal" ng-click="getCandidatos('Prefeitos', prefeitos, '0')">VISUALIZAR VOTOS</a></h3>
-								</div>
-							</div>
 					  </div>
 					</div>
-				</div>
-				<div class="col-md-6">
 					<div class="panel panel-default">
-					  <div class="panel-body">
+					  <div class="panel-body panel-body-vote">
 							<div class="row col-md-12">
-								<blockquote><h3>Vereador</h3></blockquote>
+								<blockquote><h3>Vereador <span class="pull-right">{{getCountVotos('1')}} Votos</span></h3></blockquote>
 							</div>
 							<div class="text-center" ng-show="!voteVereadorSim()">
-								<h3>Ops! Parece que você já votou.</h3>
-								<h4>Veja os votos no link abaixo.</h4>
+								<h3 class="vote-true">Ops! Parece que você já votou.</h3>
+								<h4 class="vote-true-h4">Compartilhe com seus amigos!</h4>
 							</div>
 							<form ng-show="voteVereadorSim()">
 							  <div class="form-group typeahead" ng-class="{ 'has-error': hasVereador() }">
@@ -112,15 +68,36 @@
 								  <button type="button" class="btn btn-danger btn-lg" ng-click="vote('1', '1')">Anular</button>
 							  </div>
 							</form>
-							<br/>
-							<div class="row text-center">
-								<div class="col-md-5">
-									<h3>Total de votos: {{getCountVotos('1')}}</h3>
-								</div>
-								<div class="col-md-7">
-									<h3><a href="#modal" ng-click="getCandidatos('Vereadores', vereadores, '1')">VISUALIZAR VOTOS</a></h3>
-								</div>
-							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="panel panel-default">
+					  <div class="panel-body panel-body-vote">
+						  <ul class="nav nav-tabs" role="tablist">
+						    <li role="presentation" ng-class="{'active': selected.type == '0' }"><a href="javascript:void(0)" ng-click="getCandidatos('Prefeitos', prefeitos, '0')" aria-controls="home" role="tab" data-toggle="tab"><h4>Prefeito</h4></a></li>
+						    <li role="presentation" ng-class="{'active': selected.type == '1' }"><a href="javascript:void(0)" ng-click="getCandidatos('Vereadores', vereadores, '1')" aria-controls="profile" role="tab" data-toggle="tab"><h4>Vereador</h4></a></li>
+						  </ul>
+						  <div class="tab-content">
+						    <div role="tabpanel" class="tab-pane active" id="home">
+						    	<table class="table table-condensed table-striped">
+				        		<tbody>
+				        			<tr>
+				        				<td>Branco</td>
+				        				<td class="text-center" width="100px">{{getCountSelectedVotos('0', selected.type)}} Votos</td>
+				        			</tr>
+				        			<tr>
+				        				<td>Nulos</td>
+				        				<td class="text-center" width="100px">{{getCountSelectedVotos('1', selected.type)}} Votos</td>
+				        			</tr>
+				        			<tr ng-repeat="select in selected.selected | orderBy:'-quantidade'">
+				        				<td >{{select.nome}}</td>
+				        				<td class="text-center" width="100px">{{select.quantidade || '0'}} Votos</td>
+				        			</tr>
+				        		</tbody>
+				        	</table>
+						    </div>
+						  </div>
 						</div>
 					</div>
 				</div>

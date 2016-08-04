@@ -8,7 +8,10 @@ var express = require('express'),
     mongoose = require('mongoose'),
     db = mongoose.connection,
     bodyParser = require('body-parser'),
-    Vote = require('./models/vote');
+    Vote = require('./models/vote'),
+    cors = require('cors');
+
+app.use(cors());
 
 mongoose.connect('mongodb://localhost/schroeder-2016');
 
@@ -26,11 +29,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/app', routes_index);
 
-app.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', 'tcc.fabricioronchi.com:5000');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-  res.setHeader('Access-Control-Allow-Credentials', true);
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
 
