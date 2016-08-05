@@ -30,7 +30,7 @@ angular.module('schApp').controller('schCtrl', ['$scope', '$http', function($sco
     return "";
   }
 
-  var url = '';
+  var url = 'http://107.170.43.204:5000';
 
   $scope.votoVereador = getCookie('votoVereador') !== '1';
   $scope.votoPrefeito = getCookie('votoPrefeito') !== '1';

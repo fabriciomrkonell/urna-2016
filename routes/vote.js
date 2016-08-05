@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/dados', function(req, res, next){
 	res.send({
-		"podeVotar": false,
+		"podeVotar": true,
 		"data": {
 			"vereadores": [{
 		    "nome": "AAAA",
