@@ -16,90 +16,20 @@ router.get('/', function(req, res, next) {
 
 router.get('/dados', function(req, res, next){
 	res.send({
-		"podeVotar": true,
-		"data": {
-			"vereadores": [{
-		    "nome": "AAAA",
-		    "partido": "BBBB",
-		    "numero": "123456",
-		    "quantity": 0
+		podeVotar: false,
+		data: {
+			vereadores: [{
+		    nome: 'AAAA',
+		    partido: 'BBBB',
+		    numero: '123456',
+		    quantity: 0
 	  	}],
-			"prefeitos": [{
-		    "nome": "Osvaldo e Adriano",
-		    "partido": "DDD",
-		    "numero": "45",
-		    "quantity": 0
-		  }, {
-	    "nome": "Osvaldo e Adriano",
-	    "partido": "DDD",
-	    "numero": "45",
-	    "quantity": 0
-	  }, {
-	    "nome": "Osvaldo e Adriano",
-	    "partido": "DDD",
-	    "numero": "45",
-	    "quantity": 0
-	  }, {
-	    "nome": "Osvaldo e Adriano",
-	    "partido": "DDD",
-	    "numero": "45",
-	    "quantity": 0
-	  }, {
-	    "nome": "Osvaldo e Adriano",
-	    "partido": "DDD",
-	    "numero": "45",
-	    "quantity": 0
-	  }, {
-	    "nome": "Osvaldo e Adriano",
-	    "partido": "DDD",
-	    "numero": "45",
-	    "quantity": 0
-	  }, {
-	    "nome": "Osvaldo e Adriano",
-	    "partido": "DDD",
-	    "numero": "45",
-	    "quantity": 0
-	  }, {
-	    "nome": "Osvaldo e Adriano",
-	    "partido": "DDD",
-	    "numero": "45",
-	    "quantity": 0
-	  }, {
-	    "nome": "Osvaldo e Adriano",
-	    "partido": "DDD",
-	    "numero": "45",
-	    "quantity": 0
-	  }, {
-	    "nome": "Osvaldo e Adriano",
-	    "partido": "DDD",
-	    "numero": "45",
-	    "quantity": 0
-	  },{
-	    "nome": "Osvaldo e Adriano",
-	    "partido": "DDD",
-	    "numero": "45",
-	    "quantity": 0
-	  },{
-	    "nome": "Osvaldo e Adriano",
-	    "partido": "DDD",
-	    "numero": "45",
-	    "quantity": 0
-	  },{
-	    "nome": "Osvaldo e Adriano",
-	    "partido": "DDD",
-	    "numero": "45",
-	    "quantity": 0
-	  },{
-	    "nome": "Osvaldo e Adriano",
-	    "partido": "DDD",
-	    "numero": "45",
-	    "quantity": 0
-	  },{
-	    "nome": "Osvaldo e Adriano",
-	    "partido": "DDD",
-	    "numero": "45",
-	    "quantity": 0
-	  }]
+			prefeitos: [{
+		    nome: 'Osvaldo e Adriano',
+		    partido: 'DDD',
+		    numero: '45',
+		    quantity: 0
+		  }]
 		}
 	});
 });

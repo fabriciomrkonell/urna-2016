@@ -31,7 +31,7 @@ h4{
 
 .tab-pane{
   height: 405px;
-  overflow-x: scroll;
+  overflow-y: scroll;
 }
 
 .panel-body-vote{
@@ -54,4 +54,9 @@ h4{
 .vote-true-h4{
   height: 56px;
   margin-top: 50px;
+}
+
+blockquote {
+  padding: 5px 20px;
+  margin: 0 0 5px;
 }

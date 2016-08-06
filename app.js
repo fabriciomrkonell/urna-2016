@@ -30,7 +30,7 @@ angular.module('schApp').controller('schCtrl', ['$scope', '$http', function($sco
     return "";
   }
 
-  var url = 'http://107.170.43.204:5000';
+  var url = '';
 
   $scope.votoVereador = getCookie('votoVereador') !== '1';
   $scope.votoPrefeito = getCookie('votoPrefeito') !== '1';
@@ -95,7 +95,7 @@ angular.module('schApp').controller('schCtrl', ['$scope', '$http', function($sco
   };
 
   $scope.validVote = function(type, entity){
-    if(entity !== ''){
+    if(angular.isObject(entity)){
       $scope.vote(entity.numero, type);
     }else{
       if(type === '0'){
@@ -114,7 +114,6 @@ angular.module('schApp').controller('schCtrl', ['$scope', '$http', function($sco
     }).then(function(data){
       $scope.dados = data.data.data;
       $scope.transform(data.data.data);
-      document.getElementById('modal-body').scrollTop = 0;
       if(type === '0'){
         $scope.getCandidatos('Prefeitos', $scope.prefeitos, '0');
         $scope.prefeito = '';
@@ -133,11 +132,11 @@ angular.module('schApp').controller('schCtrl', ['$scope', '$http', function($sco
   };
 
   $scope.hasVereador = function(){
-    return ($scope.vereador === '') && ($scope.validVereador);
+    return (!angular.isObject($scope.vereador)) && ($scope.validVereador);
   };
 
   $scope.hasPrefeito = function(){
-    return ($scope.prefeito === '') && ($scope.validPrefeito);
+    return (!angular.isObject($scope.prefeito)) && ($scope.validPrefeito);
   };
 
   $scope.vereador = '';
