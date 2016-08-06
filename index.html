@@ -1,32 +1,32 @@
 <html ng-app="schApp">
 	<head>
 		<meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Eleições Minicipais Schroeder - Quem ganha?">
-    <meta name="keywords" content="Eleições Minicipais Schroeder - Quem ganha?">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="description" content="Simulador Eleições Minicipais Schroeder">
+    <meta name="keywords" content="Simulador Eleições Minicipais Schroeder - Quem ganha? Deixe o seu voto e acompanhe o resultado da votação.">
     <link rel="canonical" href="http://urna.schroeder.net.br">
     <meta name="referrer" content="origin">
     <link rel="next" href="http://urna.schroeder.net.br">
-    <meta property="og:site_name" content="Eleições Minicipais Schroeder - Quem ganha?">
+    <meta property="og:site_name" content="Simulador Eleições Minicipais Schroeder">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Eleições Minicipais Schroeder - Quem ganha?">
-    <meta property="og:description" content="Eleições Minicipais Schroeder - Quem ganha?">
+    <meta property="og:title" content="Simulador Eleições Minicipais Schroeder">
+    <meta property="og:description" content="Simulador Eleições Minicipais Schroeder - Quem ganha? Deixe o seu voto e acompanhe o resultado da votação.">
     <meta property="og:url" content="http://urna.schroeder.net.br">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Eleições Minicipais Schroeder - Quem ganha?">
-    <meta name="twitter:description" content="Eleições Minicipais Schroeder - Quem ganha?">
+    <meta name="twitter:title" content="Simulador Eleições Minicipais Schroeder">
+    <meta name="twitter:description" content="Simulador Eleições Minicipais Schroeder - Quem ganha? Deixe o seu voto e acompanhe o resultado da votação.">
     <meta name="twitter:url" content="http://urna.schroeder.net.br">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Website",
-      "publisher": "Eleições Minicipais Schroeder - Quem ganha?",
+      "publisher": "Simulador Eleições Minicipais Schroeder",
       "url": "http://urna.schroeder.net.br",
-      "description": "Eleições Minicipais Schroeder - Quem ganha?"
+      "description": "Simulador Eleições Minicipais Schroeder - Quem ganha? Deixe o seu voto e acompanhe o resultado da votação."
     }
     </script>
-		<title>Schroeder - Quem ganha?</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>::Simulador Schroeder::</title>
 		<link href="bootstrap.min.css" rel="stylesheet">
 		<link href="style.css" rel="stylesheet">
 	</head>
@@ -40,7 +40,7 @@
 					<div class="panel panel-default">
 					  <div class="panel-body text-center panel-body-title">
 					  	<div class="col-md-8">
-					  		<h3>Eleições Municipais Schroeder - Quem ganha?</h3>
+					  		<h3>Simulador Eleições Municipais Schroeder</h3>
 					  	</div>
 					  	<div class="col-md-4">
 					  		<a class="btn btn-primary btn-lg" href="https://www.facebook.com/sharer/sharer.php?u=http://urna.schroeder.net.br" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;" title="Facebook">COMPARTILHAR NO FACEBOOK</a>
@@ -50,14 +50,14 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-6">
+				<div class="col-sm-6">
 					<div class="panel panel-default">
 					  <div class="panel-body panel-body-vote">
-					    <div class="row col-md-12">
+					    <div class="row col-sm-12">
 								<blockquote><h3>Prefeito <span class="pull-right">{{getCountVotos('0')}} Votos</span></h3></blockquote>
 							</div>
 							<div class="text-center" ng-show="!votePrefeitoSim()">
-								<h3 class="vote-true">Ops! Parece que você já votou.</h3>
+								<h3 class="vote-true">Ops! Você já votou.</h3>
 								<h4 class="vote-true-h4">Deixe o seu comentário!</h4>
 							</div>
 							<form ng-show="votePrefeitoSim()">
@@ -75,11 +75,11 @@
 					</div>
 					<div class="panel panel-default">
 					  <div class="panel-body panel-body-vote">
-							<div class="row col-md-12">
+							<div class="row col-sm-12">
 								<blockquote><h3>Vereador <span class="pull-right">{{getCountVotos('1')}} Votos</span></h3></blockquote>
 							</div>
 							<div class="text-center" ng-show="!voteVereadorSim()">
-								<h3 class="vote-true">Ops! Parece que você já votou.</h3>
+								<h3 class="vote-true">Ops! Você já votou.</h3>
 								<h4 class="vote-true-h4">Compartilhe com seus amigos!</h4>
 							</div>
 							<form ng-show="voteVereadorSim()">
@@ -96,7 +96,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6">
+				<div class="col-sm-6">
 					<div class="panel panel-default">
 					  <div class="panel-body panel-body-vote">
 						  <ul class="nav nav-tabs" role="tablist">
@@ -128,7 +128,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-sm-12">
 					<div class="panel panel-default">
 					  <div class="panel-body text-center">
 					  	<div id="disqus_thread"></div>
@@ -146,10 +146,10 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-sm-12">
 					<div class="panel panel-default">
 					  <div class="panel-body text-center panel-body-title">
-					  	<div class="col-md-12 text-center">
+					  	<div class="col-sm-12 text-center">
 					  		<h3>::ATENÇÃO::</h3>
 					  		<p>Este site é <strong>APOLÍTICO</strong>, ou seja, não possui nenhum vínculo com candidatos a vereador, prefeito ou partidos políticos. As informações são meramentes opinativas para futuros fins estatísticos.</p>
 					  	</div>

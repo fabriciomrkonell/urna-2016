@@ -60,3 +60,10 @@ blockquote {
   padding: 5px 20px;
   margin: 0 0 5px;
 }
+
+@media (max-width: 767px){
+  .vote-true{
+    height: 0px;
+    margin-top: 10px;
+  }
+}
