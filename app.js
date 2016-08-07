@@ -4,8 +4,6 @@ angular.module('schApp', ['ui.bootstrap']);
 
 angular.module('schApp').controller('schCtrl', ['$scope', '$http', function($scope, $http) {
 
-  window.location = '#start';
-
   $scope.podeVotar = false;
 
   function setCookie(cname, cvalue) {
@@ -127,7 +125,6 @@ angular.module('schApp').controller('schCtrl', ['$scope', '$http', function($sco
         $scope.votoVereador = false;
         setCookie('votoVereador', '1');
       }
-      window.location = "#modal";
     });
   };
 

@@ -22,13 +22,23 @@ router.get('/dados', function(req, res, next){
 		    nome: 'AAAA',
 		    partido: 'BBBB',
 		    numero: '123456',
-		    quantity: 0
+		    quantidade: 0
 	  	}],
 			prefeitos: [{
-		    nome: 'Osvaldo e Adriano',
+		    nome: 'Osvaldo Jurk e Adriano Kath',
 		    partido: 'DDD',
 		    numero: '45',
-		    quantity: 0
+		    quantidade: 0
+		  }, {
+		    nome: 'Felipe Voigt e Fulano',
+		    partido: 'DDD',
+		    numero: '16',
+		    quantidade: 0
+		  }, {
+		    nome: 'Jair Bridaroli e Fulano',
+		    partido: 'DDD',
+		    numero: '15',
+		    quantidade: 0
 		  }]
 		}
 	});
